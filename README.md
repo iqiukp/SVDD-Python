@@ -1,8 +1,6 @@
 # Support Vector Data Description (SVDD)
 
 Python Code for abnormal detection or fault detection using SVDD.
-
-Version 1.0, 1-DEC-2019
     
 Email: iqiukp@outlook.com
 
