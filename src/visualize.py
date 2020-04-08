@@ -200,6 +200,17 @@ class Visualization():
             ax2.scatter(data[:,0], data[:,1],
                         color='green',marker='o',
                         edgecolor='black',alpha=0.5, zorder = 2)
+            ax2.scatter(data[svdd.model["sv_index"],0], data[svdd.model["sv_index"],1],
+                    facecolor='C2',marker='o',s = 144,linewidths = 2,
+                    edgecolor='black', zorder = 2)
+        
+            ax2.contour(xv, yv, distance,[svdd.model["radius"]],
+                              colors='C3', linewidths=5, zorder = 1)
+            
+            ax2.legend(["Training data", "Support vectors"], 
+                      ncol = 1, loc = 0, 
+                      edgecolor = 'black',markerscale = 1.2, fancybox = True) 
+                
         else:
             ax2.scatter(data[svdd.model["pIndex"],0], data[svdd.model["pIndex"],1],
                     facecolor='C0',marker='o', s = 100,linewidths = 2,
@@ -208,16 +219,16 @@ class Visualization():
                     facecolor='C4',marker='s',s = 100,linewidths = 2,
                     edgecolor='black', zorder = 2)
         
-        ax2.scatter(data[svdd.model["sv_index"],0], data[svdd.model["sv_index"],1],
-                facecolor='C2',marker='o',s = 144,linewidths = 2,
-                edgecolor='black', zorder = 2)
-        
-        ax2.contour(xv, yv, distance,[svdd.model["radius"]],
-                          colors='C3', linewidths=5, zorder = 1)
-        
-        ax2.legend(["Training data (+)","Training data (-)", "Support vectors"], 
-                  ncol = 1, loc = 0, 
-                  edgecolor = 'black',markerscale = 1.2, fancybox = True) 
+            ax2.scatter(data[svdd.model["sv_index"],0], data[svdd.model["sv_index"],1],
+                    facecolor='C2',marker='o',s = 144,linewidths = 2,
+                    edgecolor='black', zorder = 2)
+            
+            ax2.contour(xv, yv, distance,[svdd.model["radius"]],
+                              colors='C3', linewidths=5, zorder = 1)
+            
+            ax2.legend(["Training data (+)","Training data (-)", "Support vectors"], 
+                      ncol = 1, loc = 0, 
+                      edgecolor = 'black',markerscale = 1.2, fancybox = True) 
         
         plt.show()
         
