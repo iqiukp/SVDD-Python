@@ -59,8 +59,9 @@ class SVDD():
         
         """
         start_time = time.time()
-                
-        if np.sum(label) == data.shape[0]:
+        
+        label = np.array(label, dtype = 'int')      
+        if np.abs(np.sum(label)) == data.shape[0]:
             self.labeltype = 'single'
         else:
             self.labeltype = 'hybrid'
