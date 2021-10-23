@@ -1,3 +1,6 @@
+# Coming version: An SVDD BaseEstimator based on sklearn.base
+
+
 # Support Vector Data Description (SVDD)
 
 Python Code for abnormal detection or fault detection using SVDD.
