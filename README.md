@@ -1,4 +1,7 @@
-# Coming version: An SVDD BaseEstimator based on sklearn.base
+# Coming Version: An SVDD BaseEstimator based on sklearn.base
+
+
+-------------------------------------------------------------------
 
 
 # Support Vector Data Description (SVDD)
