@@ -55,7 +55,7 @@ An example for SVDD model fitting using unlabeled data.
 
 An example for SVDD model fitting with negataive samples.
 
-```
+```Python
 import sys
 sys.path.append("..")
 from sklearn.datasets import load_wine
@@ -92,7 +92,7 @@ svdd.plot_distance(radius, distance)
 
 An example for SVDD model fitting using different kernels.
 
-```
+```Python
 import sys
 sys.path.append("..")
 from src.BaseSVDD import BaseSVDD, BananaDataset
@@ -127,7 +127,7 @@ An example for SVDD model fitting using nonlinear principal component.
 
 The KPCA algorithm is used to reduce the dimension of the original data.
 
-```
+```Python
 import sys
 sys.path.append("..")
 import numpy as np
@@ -175,7 +175,7 @@ An example for parameter optimization using PSO.
 https://github.com/guofei9987/scikit-opt
 
 
-```
+```Python
 import sys
 sys.path.append("..")
 from src.BaseSVDD import BaseSVDD, BananaDataset
@@ -227,7 +227,7 @@ An example for drawing the confusion matrix and ROC curve.
 
 An example for cross validation.
 
-```
+```Python
 import sys
 sys.path.append("..")
 from src.BaseSVDD import BaseSVDD, BananaDataset
@@ -268,7 +268,7 @@ Mean cross validation score: 0.857143
 
 An example for parameter selection using grid search.
 
-```
+```Python
 import sys
 sys.path.append("..")
 from sklearn.datasets import load_wine
@@ -303,7 +303,7 @@ print()
 
 ```
 Results
-```
+```Python
 best parameters:
 {'C': 0.5, 'gamma': 0.1, 'kernel': 'rbf'}
 
