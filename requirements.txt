@@ -1,4 +1,4 @@
-cvxopt==1.2.0
+cvxopt==1.2.7
 matplotlib==3.4.2
 numpy==1.19.2
 scikit_learn==1.0.1
