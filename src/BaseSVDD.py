@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct 26 11:21:17 2021
+Created on Sun Feb 27 00:37:30 2022
 
 @author: iqiukp
 """
@@ -15,6 +15,7 @@ from sklearn.base import BaseEstimator, OutlierMixin
 from sklearn.metrics import accuracy_score
 from sklearn.metrics.pairwise import pairwise_kernels
 from sklearn.model_selection import train_test_split
+
 class BaseSVDD(BaseEstimator, OutlierMixin):
     """One-Classification using Support Vector Data Description (SVDD).
 
@@ -35,8 +36,6 @@ class BaseSVDD(BaseEstimator, OutlierMixin):
         - if ``gamma='scale'`` (default) is passed then it uses
           1 / (n_features * X.var()) as value of gamma,
         - if 'auto', uses 1 / n_features.
-        .. versionchanged:: 0.22
-           The default value of ``gamma`` changed from 'auto' to 'scale'.
     coef0 : float, default=0.0
         Independent term in kernel function.
         It is only significant in 'poly' and 'sigmoid'.
@@ -61,7 +60,7 @@ class BaseSVDD(BaseEstimator, OutlierMixin):
         self.C = C
         self.kernel = kernel
         self.degree = degree
-        self.gamma = gamma
+        self.gamma = gamma       
         self.coef0 = coef0
         self.n_jobs = n_jobs
         self.display = display
@@ -88,6 +87,8 @@ class BaseSVDD(BaseEstimator, OutlierMixin):
         self.running_time = None
         self.boundary_indices = None
         self.classes_ = None
+        
+
    
     @property 
     def n_samples(self):
@@ -135,7 +136,24 @@ class BaseSVDD(BaseEstimator, OutlierMixin):
             self.weight = np.ones((self.n_samples, 1), dtype=np.int64)
         else:
             self.weight = weight   
-      
+            
+        # check 'gamma'
+        if self.gamma == 0:
+            raise ValueError(
+                "The gamma value of 0.0 is invalid. Use 'auto' to set"
+                " gamma to a value of 1 / n_features.") 
+        if self.gamma is None:
+            self.gamma = 'scale'
+        if isinstance(self.gamma, str):
+            if self.gamma == "scale":
+               X_var = X.var()
+               self.gamma = 1.0 / (X.shape[1] * X_var) if X_var != 0 else 1.0
+            elif self.gamma == "auto":
+                self.gamma = 1.0 / X.shape[1]
+            else:
+               raise ValueError(
+                   "When 'gamma' is a string, it should be either 'scale' or 'auto'.")
+  
         # get SVDD model
         self.get_model()
         display_ = self.display
@@ -162,6 +180,7 @@ class BaseSVDD(BaseEstimator, OutlierMixin):
             params = self.kernel_params or {}
         else:
             params = {"gamma": self.gamma, "degree": self.degree, "coef0": self.coef0}
+
         return pairwise_kernels(
             X, Y, metric=self.kernel, filter_params=True, n_jobs=self.n_jobs, **params)
 
