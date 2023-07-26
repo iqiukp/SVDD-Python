@@ -278,7 +278,7 @@ class BaseSVDD(BaseEstimator, OutlierMixin):
         tmp_ = -2*np.sum(tmp_6, axis=1, keepdims=True)        
         self.offset = np.sum(np.multiply(np.dot(self.alpha, self.alpha.T), K)) 
         self.center = np.dot(self.alpha.T, self.X)
-        self.radius = np.sqrt(np.mean(np.diag(K)) + self.offset+np.mean(tmp_[self.boundary_indices, 0]))
+        self.radius = np.sqrt(np.mean(np.diag(K)[self.boundary_indices]) + self.offset + np.mean(tmp_[self.boundary_indices, 0]))
 
     def predict(self, X, y=None):
         """Predict the class labels for the provided data.
@@ -305,8 +305,9 @@ class BaseSVDD(BaseEstimator, OutlierMixin):
         results['predicted_y'] = np.mat(np.ones(results['n_samples'])).T
         index_ = results['distance'] > self.radius
         results['predicted_y'][index_] = -1
+        results['predicted_y'] = np.asarray(results['predicted_y'])
         results['n_alarm'] = np.sum(index_==True)  
-          
+        
         if results['exist_y'] == True:
             results['accuracy'] = accuracy_score(results['y'], results['predicted_y'])
 
@@ -348,7 +349,7 @@ class BaseSVDD(BaseEstimator, OutlierMixin):
             positive scores represent inliers.
             
         """
-        return self.radius-self.get_distance(X)
+        return np.asarray(self.radius-self.get_distance(X))
     
     def get_params(self, deep=True):
         """
